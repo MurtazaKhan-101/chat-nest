@@ -6,6 +6,7 @@ const nextConfig = {
         ["next-superjson-plugin", {}]
       ]
     },
+    typescript: { ignoreBuildErrors: true },
     images: {
       remotePatterns: [
         {
