@@ -167,5 +167,4 @@ const AuthForm = () => {
         </div>
      );
 }
- 
 export default AuthForm;
