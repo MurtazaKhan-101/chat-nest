@@ -55,46 +55,62 @@ export default function LandingPage() {
       return () => clearInterval(interval); // Cleanup interval on component unmount
     }, [current]);
 
+      const [isOpen, setIsOpen] = useState(false);
+    
+      const toggleMenu = () => {
+        setIsOpen(!isOpen);
+      }
+
   return (
     <div>
         
-      <section className="w-full px-8 text-gray-700 bg-white">
-        <div className="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
-          <div className="relative flex flex-col md:flex-row">
-            <a
-              href="#_"
-              className="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0"
-            >
-              <span className="mx-auto text-xl font-black leading-none text-gray-900 select-none">
-                Chat-Nest<span className="text-indigo-600">.</span>
-              </span>
-            </a>
-            <nav className="flex flex-wrap items-center mb-5 text-base md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
-              <a
-                href="#section2"
-                className="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900"
-                onClick={smoothScroll}
-              >
-                Home
-              </a>
-              <a
-                href="#section4"
-                className="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900"
-                onClick={smoothScroll}
-              >
-                Features
-              </a>
-              <a
-                href="#section5"
-                className="mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900"
-                onClick={smoothScroll}
-              >
-                Tools
-              </a>
-            </nav>
-          </div>
-
-          <div className="inline-flex items-center ml-5 space-x-6 lg:justify-end">
+        <section className="w-full px-8 text-gray-700 bg-white">
+      <div className="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+        <div className="flex justify-between items-center w-full md:w-auto">
+          <a
+            href="#_"
+            className="flex items-center font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center"
+          >
+            <span className="text-xl font-black leading-none text-gray-900 select-none">
+              Chat-Nest<span className="text-indigo-600">.</span>
+            </span>
+          </a>
+          <button
+            className="md:hidden block text-gray-900 focus:outline-none"
+            onClick={toggleMenu}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+        <br />
+        <br />
+        <nav
+          className={`flex-col flex-grow pb-4 md:pb-0 md:flex md:flex-row md:items-center md:justify-center ${isOpen ? 'block' : 'hidden'}`}
+        >
+          <a
+            href="#section2"
+            className="block mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900"
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </a>
+          <a
+            href="#section4"
+            className="block mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900"
+            onClick={() => setIsOpen(false)}
+          >
+            Features
+          </a>
+          <a
+            href="#section5"
+            className="block mr-5 font-medium leading-6 text-gray-600 hover:text-gray-900"
+            onClick={() => setIsOpen(false)}
+          >
+            Tools
+          </a>
+          <div className="block md:hidden mt-4">
             <Link
               href="/login"
               className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
@@ -102,10 +118,21 @@ export default function LandingPage() {
               Sign in
             </Link>
           </div>
-        </div>
-      </section>
+        </nav>
 
-      <section id='section2' className="relative w-full px-2 py-32 bg-white md:px-0">
+        <div className="hidden md:flex items-center space-x-6 lg:justify-end">
+          <Link
+            href="/login"
+            className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+          >
+            Sign in
+          </Link>
+        </div>
+      </div>
+    </section>
+
+
+      <section id='section2' className="relative w-full px-2 py-32 sm:py-2 bg-white md:px-0">
         <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
           <div className="relative flex flex-wrap items-center sm:-mx-3">
             <div className="relative w-full md:w-1/2 md:px-3">
@@ -119,7 +146,7 @@ export default function LandingPage() {
                 <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
                   Stay connected with your friends and family with our feature-rich chat app.
                 </p>
-                <div className="relative flex flex-col sm:flex-row sm:space-x-4">
+                <div className="relative flex flex-col sm:flex-row sm:space-x-4 sm:text-sm">
                   <Link
                     href="/login"
                     className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
@@ -367,13 +394,13 @@ export default function LandingPage() {
                 </ul>
               </div>
             </div>
-            <div className="w-full px-3 mb-12 lg:w-1/2 order-0 lg:order-1 lg:mb-0">
-              <img
-                className="mx-auto w-[400px] sm:max-w-sm lg:max-w-full"
-                src="stacy.svg"
-                alt="Chat App Feature Image"
-              />
-            </div>
+            <div className="box-border relative w-full max-w-md px-4 mt-5 -ml-5 text-center bg-no-repeat bg-contain border-solid md:ml-0 md:mt-0 md:max-w-none lg:mb-0 md:w-1/2 xl:pl-10">
+            <img
+              src="stacy.svg"
+              className="p-2 h-[350px] pl-6 pr-5 xl:pl-16 xl:pr-20"
+              alt="Productivity"
+            />
+          </div>
           </div>
         </div>
       </section>
